@@ -1,5 +1,6 @@
 <?php
 
+use App\Models\Profile;
 use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
@@ -13,10 +14,10 @@ return new class extends Migration
      */
     public function up()
     {
-        Schema::create('users', function (Blueprint $table) {
+        Schema::create('system_users', function (Blueprint $table) {
             $table->id();
             $table->string('name');
-            $table->foreignId('profile_id')->constrained('profiles');
+            $table->foreignId('profile_id')->default(Profile::MASTER_ID);
             $table->string('email')->unique();
             $table->timestamp('email_verified_at')->nullable();
             $table->string('password');
@@ -33,6 +34,6 @@ return new class extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('users');
+        Schema::dropIfExists('system_users');
     }
 };

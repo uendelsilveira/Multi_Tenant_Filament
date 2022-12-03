@@ -13,8 +13,8 @@ class TenantsDatabaseSeeder extends Seeder
      */
     public function run()
     {
-        // $this->call(ProfileSeeder::class);
-        // $this->call(UserSeeder::class);
+        $this->call(ProfileSeeder::class);
+        $this->call(UserSeeder::class);
         // if (app()->environment() != 'production') {
         //     $this->call(TechnicianAccessSeeder::class);
         //     $this->call(LockerSeeder::class);
