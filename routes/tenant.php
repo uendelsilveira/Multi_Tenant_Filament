@@ -8,6 +8,22 @@ use Stancl\Tenancy\Middleware\InitializeTenancyBySubdomain;
 
 /*
 |--------------------------------------------------------------------------
+| Universal Routes // Web Universal Routes - central system and tenants
+|--------------------------------------------------------------------------
+*/
+Route::group(['prefix' => config('sanctum.prefix', 'sanctum')], static function () {
+    Route::get('/csrf-cookie',[CsrfCookieController::class, 'show'])
+        // Use tenancy initialization middleware of your choice
+        ->middleware(['universal', 'web', InitializeTenancyBySubdomain::class])
+        ->name('sanctum.csrf-cookie');
+});
+
+Route::middleware(['universal', 'web', InitializeTenancyBySubdomain::class])->group(function () {
+    // rotas universais, login, home e etc
+});
+
+/*
+|--------------------------------------------------------------------------
 | Tenant Routes
 |--------------------------------------------------------------------------
 |
