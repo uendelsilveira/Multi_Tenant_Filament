@@ -68,5 +68,6 @@ class Kernel extends HttpKernel
         'verified' => \Illuminate\Auth\Middleware\EnsureEmailIsVerified::class,
         'client_credentials' => \Laravel\Passport\Http\Middleware\CheckClientCredentials::class,
         'json_response' => \App\Http\Middleware\ForceJsonResponse::class,
+        'global_scopes' => \App\Http\Middleware\EnableGlobalScopesMiddleware::class,
     ];
 }
