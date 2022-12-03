@@ -31,4 +31,8 @@ Route::group(['middleware' => [
     PreventAccessFromCentralDomains::class,
 ]], function(){
     // rotas de api
+    Route::get('/', function () {
+        // dd(\App\Models\User::all()->toJson($flags=JSON_PRETTY_PRINT));
+        return 'This is your multi-tenant application. The id of the current tenant is ' . tenant('id');
+    });
 });

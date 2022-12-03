@@ -2,7 +2,10 @@
 
 namespace App\Providers;
 
+use Illuminate\Support\Facades\Route;
 use Illuminate\Support\ServiceProvider;
+use Laravel\Passport\Passport;
+use Stancl\Tenancy\Middleware\InitializeTenancyBySubdomain;
 
 class AppServiceProvider extends ServiceProvider
 {
@@ -13,7 +16,18 @@ class AppServiceProvider extends ServiceProvider
      */
     public function register()
     {
-        //
+        Passport::loadKeysFrom(base_path('/storage'));
+        Passport::ignoreMigrations();
+        Passport::$registersRoutes = false;
+
+        Route::group([
+            'as' => 'passport.',
+            'middleware' => [InitializeTenancyBySubdomain::class], // Use tenancy initialization middleware of your choice
+            'prefix' => config('passport.path', 'oauth'),
+            'namespace' => 'Laravel\Passport\Http\Controllers',
+        ], function () {
+            $this->loadRoutesFrom(__DIR__ . "/../../vendor/laravel/passport/src/../routes/web.php");
+        });
     }
 
     /**
