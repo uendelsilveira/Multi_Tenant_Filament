@@ -69,5 +69,7 @@ class Kernel extends HttpKernel
         'client_credentials' => \Laravel\Passport\Http\Middleware\CheckClientCredentials::class,
         'json_response' => \App\Http\Middleware\ForceJsonResponse::class,
         'global_scopes' => \App\Http\Middleware\EnableGlobalScopesMiddleware::class,
+        'valid_locker' => \App\Http\Middleware\EnsureLockerIsValid::class,
+        'configured_locker' => \App\Http\Middleware\EnsureLockerIsConfigured::class,
     ];
 }

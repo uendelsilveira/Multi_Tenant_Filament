@@ -2,15 +2,10 @@
 
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\api\lockers\LogsController;
-use App\Http\Controllers\api\lockers\DoorsController;
-use App\Http\Controllers\api\lockers\DeliveriesController;
-use App\Http\Controllers\api\lockers\PickupKeysController;
 use App\Http\Controllers\api\lockers\TechnicianController;
-use App\Http\Controllers\api\lockers\CondominiumController;
 use Stancl\Tenancy\Middleware\InitializeTenancyBySubdomain;
 use App\Http\Controllers\api\lockers\ConfigurationController;
 use Stancl\Tenancy\Middleware\PreventAccessFromCentralDomains;
-use App\Http\Controllers\api\lockers\DeliverymanReceiptController;
 use App\Http\Controllers\api\companies\WebhooksController as CompanyWebhooksController;
 
 /*
@@ -30,9 +25,14 @@ Route::group(['middleware' => [
     InitializeTenancyBySubdomain::class,
     PreventAccessFromCentralDomains::class,
 ]], function(){
-    // rotas de api
-    Route::get('/', function () {
-        // dd(\App\Models\User::all()->toJson($flags=JSON_PRETTY_PRINT));
-        return 'This is your multi-tenant application. The id of the current tenant is ' . tenant('id');
+
+//   Api Lockers -------------------------------------------------------------------------------------------------------
+    Route::prefix('armarios/{codigo_armario}')->middleware("valid_locker")->group(function () {
+        Route::post('configuracao', [ConfigurationController::class, 'updateConfiguration']);
+
+        Route::middleware("configured_locker")->group(function() {
+            Route::get('tecnicos', [TechnicianController::class, 'allTechnician']);
+            Route::post('logs', [LogsController::class, 'storeLog']);
+        });
     });
 });
