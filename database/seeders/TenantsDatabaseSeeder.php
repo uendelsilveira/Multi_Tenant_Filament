@@ -15,10 +15,12 @@ class TenantsDatabaseSeeder extends Seeder
     {
         $this->call(ProfileSeeder::class);
         $this->call(UserSeeder::class);
-        // if (app()->environment() != 'production') {
-        //     $this->call(TechnicianAccessSeeder::class);
-        //     $this->call(LockerSeeder::class);
-        //     $this->call(LockerOauthClientSeeder::class);
-        // }
+        if (app()->environment() != 'production') {
+            // $this->call(TechnicianAccessSeeder::class);
+            $this->call(LockerSeeder::class);
+            $this->call(LockerOauthClientSeeder::class);
+            $this->call(SizeSeeder::class);
+            $this->call(DoorSeeder::class);
+        }
     }
 }
