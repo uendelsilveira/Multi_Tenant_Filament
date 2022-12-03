@@ -19,7 +19,6 @@ class RouteServiceProvider extends ServiceProvider
      */
     public const HOME = '/home';
 
-
     protected function mapWebRoutes()
     {
         foreach ($this->centralDomains() as $domain) {
@@ -46,7 +45,6 @@ class RouteServiceProvider extends ServiceProvider
         return config('tenancy.central_domains');
     }
 
-
     /**
      * Define your route model bindings, pattern filters, and other route configuration.
      *
@@ -57,7 +55,7 @@ class RouteServiceProvider extends ServiceProvider
         $this->configureRateLimiting();
 
         $this->routes(function () {
-            $this->mapApiRoutes();
+            // $this->mapApiRoutes();
             $this->mapWebRoutes();
         });
     }

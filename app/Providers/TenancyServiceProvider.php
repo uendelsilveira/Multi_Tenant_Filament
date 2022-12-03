@@ -24,15 +24,15 @@ class TenancyServiceProvider extends ServiceProvider
             // Tenant events
             Events\CreatingTenant::class => [],
             Events\TenantCreated::class => [
-                JobPipeline::make([
-                    Jobs\CreateDatabase::class,
-                    Jobs\MigrateDatabase::class,
-                    // Jobs\SeedDatabase::class,
-
+                JobPipeline::make(array_merge(
+                    env('TN_JOBS_CREATE_DB', true) ? [Jobs\CreateDatabase::class] : [],
+                    env('TN_JOBS_MIGRATE_DB', true) ? [Jobs\MigrateDatabase::class] : [],
+                    env('TN_JOBS_SEED_DB', false) ? [Jobs\SeedDatabase::class] : [],
+                    [
                     // Your own jobs to prepare the tenant.
                     // Provision API keys, create S3 buckets, anything you want!
-
-                ])->send(function (Events\TenantCreated $event) {
+                    ]
+                ))->send(function (Events\TenantCreated $event) {
                     return $event->tenant;
                 })->shouldBeQueued(false), // `false` by default, but you probably want to make this `true` for production.
             ],
@@ -123,6 +123,12 @@ class TenancyServiceProvider extends ServiceProvider
         if (file_exists(base_path('routes/tenant.php'))) {
             Route::namespace(static::$controllerNamespace)
                 ->group(base_path('routes/tenant.php'));
+        }
+        if (file_exists(base_path('routes/tenantApi.php'))) {
+            Route::prefix('api')
+                ->middleware('api')
+                ->namespace(static::$controllerNamespace)
+                ->group(base_path('routes/tenantApi.php'));
         }
     }
 
