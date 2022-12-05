@@ -5,6 +5,7 @@ declare(strict_types=1);
 use Illuminate\Support\Facades\Route;
 use Stancl\Tenancy\Middleware\PreventAccessFromCentralDomains;
 use Stancl\Tenancy\Middleware\InitializeTenancyBySubdomain;
+use Laravel\Sanctum\Http\Controllers\CsrfCookieController;
 
 /*
 |--------------------------------------------------------------------------
@@ -18,7 +19,7 @@ Route::group(['prefix' => config('sanctum.prefix', 'sanctum')], static function 
         ->name('sanctum.csrf-cookie');
 });
 
-Route::middleware(['universal', 'web', InitializeTenancyBySubdomain::class])->group(function () {
+Route::middleware(['universal', 'universal_guard', 'web', InitializeTenancyBySubdomain::class])->group(function () {
     // rotas universais, login, home e etc
 });
 
