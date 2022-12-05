@@ -35,8 +35,4 @@ use Illuminate\Support\Facades\Route;
 Route::middleware(['system_guard', 'auth:system', 'global_scopes'])->group(function () {
     // Route::get('/companies/{id}/impersonate', [CompanyController::class, 'impersonate'])->name('companies.impersonate');
     // Route::resource('companies', CompanyController::class)->except('show');
-
-    Route::get('/', function () {
-        return view('welcome');
-    });
 });

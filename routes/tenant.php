@@ -2,6 +2,7 @@
 
 declare(strict_types=1);
 
+use App\Http\Controllers\ProfileController;
 use Illuminate\Support\Facades\Route;
 use Stancl\Tenancy\Middleware\PreventAccessFromCentralDomains;
 use Stancl\Tenancy\Middleware\InitializeTenancyBySubdomain;
@@ -19,8 +20,30 @@ Route::group(['prefix' => config('sanctum.prefix', 'sanctum')], static function 
         ->name('sanctum.csrf-cookie');
 });
 
-Route::middleware(['universal', 'universal_guard', 'web', InitializeTenancyBySubdomain::class])->group(function () {
-    // rotas universais, login, home e etc
+Route::middleware([
+    'universal',
+    'universal_guard',
+    'web',
+    InitializeTenancyBySubdomain::class
+])->group(function () {
+    require __DIR__.'/auth.php';
+
+    Route::get('/', function () {
+        return view('welcome');
+    });
+
+    Route::middleware(['auth', 'global_scopes'])->group(function () {
+
+        Route::get('/dashboard', function () {
+            return view('dashboard');
+        })->middleware(['auth'])
+        // ->middleware(['auth', 'verified'])
+        ->name('dashboard');
+
+        Route::get('/profile', [ProfileController::class, 'edit'])->name('profile.edit');
+        Route::patch('/profile', [ProfileController::class, 'update'])->name('profile.update');
+        Route::delete('/profile', [ProfileController::class, 'destroy'])->name('profile.destroy');
+    });
 });
 
 /*
@@ -34,14 +57,16 @@ Route::middleware(['universal', 'universal_guard', 'web', InitializeTenancyBySub
 | Feel free to customize them however you want. Good luck!
 |
 */
-
 Route::middleware([
     'web',
     InitializeTenancyBySubdomain::class,
     PreventAccessFromCentralDomains::class,
 ])->group(function () {
-    Route::get('/', function () {
-        // dd(\App\Models\User::all()->toJson($flags=JSON_PRETTY_PRINT));
-        return 'This is your multi-tenant application. The id of the current tenant is ' . tenant('id');
+    Route::middleware(['auth:tenants', 'global_scopes'])->group(function () {
+
+        Route::get('/tenant', function () {
+            // dd(\App\Models\User::all()->toJson($flags=JSON_PRETTY_PRINT));
+            return 'This is your multi-tenant application. The id of the current tenant is ' . tenant('id');
+        });
     });
 });
