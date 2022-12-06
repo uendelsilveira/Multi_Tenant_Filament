@@ -2,6 +2,7 @@
 
 declare(strict_types=1);
 
+use App\Http\Controllers\ImpersonateController;
 use Illuminate\Support\Facades\Route;
 use Stancl\Tenancy\Middleware\PreventAccessFromCentralDomains;
 use Stancl\Tenancy\Middleware\InitializeTenancyBySubdomain;
@@ -49,12 +50,15 @@ Route::middleware(['universal', 'universal_guard', 'web', InitializeTenancyBySub
 
 Route::middleware([
     'web',
-    'auth:tenants',
     InitializeTenancyBySubdomain::class,
     PreventAccessFromCentralDomains::class,
 ])->group(function () {
-    Route::get('/', function () {
-        // dd(\App\Models\User::all()->toJson($flags=JSON_PRETTY_PRINT));
-        return 'This is your multi-tenant application. The id of the current tenant is ' . tenant('id');
+    Route::get('/impersonate/{token}', [ImpersonateController::class, 'impersonateAndRedirect'])->name('tenant.impersonate');
+
+    Route::middleware(['auth:tenants', 'global_scopes'])->group(function () {
+        Route::get('/', function () {
+            // dd(\App\Models\User::all()->toJson($flags=JSON_PRETTY_PRINT));
+            return 'This is your multi-tenant application. The id of the current tenant is ' . tenant('id');
+        });
     });
 });

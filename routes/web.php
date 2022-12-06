@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\TenantController;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -37,7 +38,8 @@ Route::middleware([
     'auth:system',
     'global_scopes'
 ])->group(function () {
-    // Route::get('/companies/{id}/impersonate', [CompanyController::class, 'impersonate'])->name('companies.impersonate');
+    Route::get('/tenants/{id}/impersonate', [TenantController::class, 'impersonate'])->name('tenants.impersonate');
+    Route::get('/tenants', [TenantController::class, 'index'])->name('tenants.index');
     // Route::resource('companies', CompanyController::class)->except('show');
 
     Route::get('/', function () {
