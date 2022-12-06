@@ -6,6 +6,20 @@ use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\SoftDeletes;
 
+/**
+ * App\Models\Door
+ *
+ * @property-read \App\Models\Locker|null $locker
+ * @property-read \App\Models\Size|null $size
+ * @method static \Database\Factories\DoorFactory factory(...$parameters)
+ * @method static \Illuminate\Database\Eloquent\Builder|Door newModelQuery()
+ * @method static \Illuminate\Database\Eloquent\Builder|Door newQuery()
+ * @method static \Illuminate\Database\Query\Builder|Door onlyTrashed()
+ * @method static \Illuminate\Database\Eloquent\Builder|Door query()
+ * @method static \Illuminate\Database\Query\Builder|Door withTrashed()
+ * @method static \Illuminate\Database\Query\Builder|Door withoutTrashed()
+ * @mixin \Eloquent
+ */
 class Door extends Model
 {
     protected $table = "doors";
