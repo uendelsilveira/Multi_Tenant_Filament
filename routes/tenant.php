@@ -21,6 +21,18 @@ Route::group(['prefix' => config('sanctum.prefix', 'sanctum')], static function 
 
 Route::middleware(['universal', 'universal_guard', 'web', InitializeTenancyBySubdomain::class])->group(function () {
     // rotas universais, login, home e etc
+    Route::get('/login', function () {
+        // dd(\App\Models\User::all()->toJson($flags=JSON_PRETTY_PRINT));
+        if (Auth::attempt(['email' => 'admin@azanonatec.com.br', 'password' => 'q7a4z1x2'])) {
+            // Authentication was successful...
+            logger('login ok');
+            return response('login ok');
+        }
+        else {
+            logger('login fail');
+            return response('login fail');
+        }
+    })->name('login');
 });
 
 /*
@@ -37,6 +49,7 @@ Route::middleware(['universal', 'universal_guard', 'web', InitializeTenancyBySub
 
 Route::middleware([
     'web',
+    'auth:tenants',
     InitializeTenancyBySubdomain::class,
     PreventAccessFromCentralDomains::class,
 ])->group(function () {

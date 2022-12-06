@@ -32,11 +32,16 @@ use Illuminate\Support\Facades\Route;
 */
 
 // web routes for the central system(not tenants)
-Route::middleware(['system_guard', 'auth:system', 'global_scopes'])->group(function () {
+Route::middleware([
+    // 'system_guard',
+    'auth:system',
+    'global_scopes'
+])->group(function () {
     // Route::get('/companies/{id}/impersonate', [CompanyController::class, 'impersonate'])->name('companies.impersonate');
     // Route::resource('companies', CompanyController::class)->except('show');
 
     Route::get('/', function () {
-        return view('welcome');
+        // return view('welcome');
+        return 'This is your multi-tenant application. Current at Central System.';
     });
 });
