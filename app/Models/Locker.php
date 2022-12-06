@@ -8,6 +8,22 @@ use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Laravel\Passport\ClientRepository;
 use Illuminate\Database\Eloquent\SoftDeletes;
 
+/**
+ * App\Models\Locker
+ *
+ * @property-read \Illuminate\Database\Eloquent\Collection|\App\Models\Door[] $doors
+ * @property-read int|null $doors_count
+ * @property-read \Illuminate\Database\Eloquent\Collection|\App\Models\Size[] $sizes
+ * @property-read int|null $sizes_count
+ * @method static \Database\Factories\LockerFactory factory(...$parameters)
+ * @method static \Illuminate\Database\Eloquent\Builder|Locker newModelQuery()
+ * @method static \Illuminate\Database\Eloquent\Builder|Locker newQuery()
+ * @method static \Illuminate\Database\Query\Builder|Locker onlyTrashed()
+ * @method static \Illuminate\Database\Eloquent\Builder|Locker query()
+ * @method static \Illuminate\Database\Query\Builder|Locker withTrashed()
+ * @method static \Illuminate\Database\Query\Builder|Locker withoutTrashed()
+ * @mixin \Eloquent
+ */
 class Locker extends Model
 {
     use HasFactory, SoftDeletes;
