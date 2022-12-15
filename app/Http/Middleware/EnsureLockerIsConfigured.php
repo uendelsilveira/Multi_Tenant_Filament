@@ -21,7 +21,7 @@ class EnsureLockerIsConfigured
     {
         /** @var Locker $locker */
         $locker = $request->get("lockerModel");
-        if($locker->status === Locker::STATUS_WAITING_CONFIG) {
+        if($locker->configured === Locker::WAITING_CONFIG) {
             return new Response(
                 [
                     "mensagem" => "Aguardando o armário enviar suas configurações",

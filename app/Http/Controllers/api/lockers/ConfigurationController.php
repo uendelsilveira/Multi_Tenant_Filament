@@ -23,7 +23,7 @@ class ConfigurationController extends Controller
     {
         /** @var Locker $locker */
         $locker = $request->get("lockerModel");
-        if($locker->status === Locker::STATUS_CONFIGURED) {
+        if($locker->configured === Locker::CONFIGURED) {
             return \response()->json([
                 "mensagem" => "O armário já estava configurado",
             ], 200);
@@ -51,7 +51,7 @@ class ConfigurationController extends Controller
             $door->status = Door::STATUS_EMPTY;
             $door->save();
         }
-        $locker->status = Locker::STATUS_CONFIGURED;
+        $locker->configured = Locker::CONFIGURED;
         $locker->save();
 
         return new Response(status: 200);
