@@ -72,6 +72,14 @@ return [
             'driver' => 'eloquent',
             'model' => App\Models\SystemUser::class,
         ],
+        'lockers' => [
+            'driver' => 'eloquent',
+            'model' => App\Models\Locker::class,
+        ],
+        'companies' => [
+            'driver' => 'eloquent',
+            'model' => App\Models\Tenant::class,
+        ],
 
         // 'users' => [
         //     'driver' => 'database',
