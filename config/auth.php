@@ -76,7 +76,7 @@ return [
             'driver' => 'eloquent',
             'model' => App\Models\Locker::class,
         ],
-        'companies' => [
+        'tenants' => [
             'driver' => 'eloquent',
             'model' => App\Models\Tenant::class,
         ],

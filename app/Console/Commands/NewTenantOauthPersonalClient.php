@@ -5,14 +5,14 @@ namespace App\Console\Commands;
 use Illuminate\Console\Command;
 use Laravel\Passport\ClientRepository;
 
-class NewCompanyOauthPersonalClient extends Command
+class NewTenantOauthPersonalClient extends Command
 {
     /**
      * The name and signature of the console command.
      *
      * @var string
      */
-    protected $signature = 'passport:companyClient {--tenants=* : The tenant(s) to run the command for. Default: all}';
+    protected $signature = 'passport:tenantClient {--tenants=* : The tenant(s) to run the command for. Default: all}';
 
     /**
      * The console command description.
@@ -35,7 +35,7 @@ class NewCompanyOauthPersonalClient extends Command
                 null,
                 'Company Personal Access Client',
                 "",
-                'companies',
+                'tenants',
                 true
             );
 
