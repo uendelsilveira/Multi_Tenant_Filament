@@ -17,14 +17,12 @@ class SizeFactory extends Factory
      */
     public function definition()
     {
-        $locker_ids = Locker::all()->pluck("id");
-
         return [
             'description' => $this->faker->randomElement(array('big','medium','small')),
             'width' => $this->faker->numerify('##'),
             'height'=> $this->faker->numerify('##'),
             'depth' => $this->faker->numerify('##'),
-            'locker_id' => $this->faker->randomElement($locker_ids),
+            'locker_id' => Locker::factory(),
         ];
     }
 }
