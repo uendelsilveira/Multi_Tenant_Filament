@@ -18,12 +18,11 @@ class DoorFactory extends Factory
      */
     public function definition()
     {
-        $sizesIds = Size::all()->pluck('id');
         return [
             'number'        => $this->faker->numerify('##'),
             'status'        => $this->faker->randomElement(Door::statusArray()),
-            'locker_id'     => $this->faker->numerify('##'),
-            'size_id'       => $this->faker->randomElement($sizesIds),
+            'locker_id'     => Locker::factory(),
+            'size_id'       => Size::factory(),
         ];
     }
 }

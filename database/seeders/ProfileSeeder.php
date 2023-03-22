@@ -16,11 +16,8 @@ class ProfileSeeder extends Seeder
     {
         $profileDataArray = [
             [ 'id' => Profile::ADMIN_ID, 'level' => 'admin' ],
-            [ 'id' => Profile::LOCAL_MANAGER_ID, 'level' => 'local_manager' ],
             [ 'id' => Profile::MASTER_ID, 'level' => 'master' ],
-            [ 'id' => Profile::MANAGER_ID, 'level' => 'manager' ],
             [ 'id' => Profile::OPERATOR_ID, 'level' => 'operator' ],
-            [ 'id' => Profile::TECHNICIAN_ID, 'level' => 'technician' ],
         ];
 
         foreach ($profileDataArray as $profileData) {

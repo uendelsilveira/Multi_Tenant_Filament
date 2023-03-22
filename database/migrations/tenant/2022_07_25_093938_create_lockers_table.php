@@ -19,7 +19,7 @@ return new class extends Migration
             $table->string('name');
             $table->string('serial');
             $table->timestamp('last_request_time')->nullable();
-            $table->integer("status")->default(Locker::STATUS_WAITING_CONFIG);
+            $table->boolean("configured")->default(Locker::WAITING_CONFIG);
             $table->string('description')->default("");
             $table->string('software_config')->nullable();
             $table->timestamp('created_at')->nullable();

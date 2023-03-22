@@ -28,8 +28,8 @@ class Locker extends Model
 {
     use HasFactory, SoftDeletes;
 
-    const STATUS_WAITING_CONFIG = 0;
-    const STATUS_CONFIGURED = 1;
+    const WAITING_CONFIG = 0;
+    const CONFIGURED = 1;
 
     protected $table = "lockers";
 
@@ -37,7 +37,7 @@ class Locker extends Model
         'name',
         'serial',
         'last_request_time',
-        'status',
+        'configured',
         'description',
         'software_config',
     ];
