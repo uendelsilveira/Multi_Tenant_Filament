@@ -19,8 +19,6 @@ class TenantsDatabaseSeeder extends Seeder
             // $this->call(TechnicianAccessSeeder::class);
             $this->call(LockerSeeder::class);
             $this->call(LockerOauthClientSeeder::class);
-            $this->call(SizeSeeder::class);
-            $this->call(DoorSeeder::class);
         }
     }
 }

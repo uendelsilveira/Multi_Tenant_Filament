@@ -27,11 +27,8 @@ use Illuminate\Database\Eloquent\Model;
 class Profile extends Model
 {
     public const ADMIN_ID = 1;
-    public const LOCAL_MANAGER_ID = 2;
     public const MASTER_ID = 3;
-    public const MANAGER_ID = 4;
     public const OPERATOR_ID = 5;
-    public const TECHNICIAN_ID = 6;
 
     public function users()
     {
