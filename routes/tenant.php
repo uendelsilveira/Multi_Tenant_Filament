@@ -16,11 +16,11 @@ use Laravel\Sanctum\Http\Controllers\CsrfCookieController;
 Route::group(['prefix' => config('sanctum.prefix', 'sanctum')], static function () {
     Route::get('/csrf-cookie',[CsrfCookieController::class, 'show'])
         // Use tenancy initialization middleware of your choice
-        ->middleware(['universal', 'web', InitializeTenancyBySubdomain::class])
+        ->middleware(['universal_guard', 'web', InitializeTenancyBySubdomain::class])
         ->name('sanctum.csrf-cookie');
 });
 
-Route::middleware(['universal', 'universal_guard', 'web', InitializeTenancyBySubdomain::class])->group(function () {
+Route::middleware(['universal_guard', 'web', InitializeTenancyBySubdomain::class])->group(function () {
     // rotas universais, login, home e etc
     Route::get('/login', function () {
         // dd(\App\Models\User::all()->toJson($flags=JSON_PRETTY_PRINT));
