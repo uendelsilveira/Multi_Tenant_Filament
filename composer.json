@@ -6,11 +6,11 @@
     "license": "MIT",
     "require": {
         "php": "^8.3.0",
-        "filament/filament": "^v2.17.56",
+        "filament/filament": "^v3.2.127",
         "guzzlehttp/guzzle": "^7.9.2",
-        "laravel/framework": "^v10.48.25",
-        "laravel/passport": "^11.10.6",
-        "laravel/sanctum": "^v3.3.3",
+        "laravel/framework": "^v11.34.2",
+        "laravel/passport": "^v12.3.1",
+        "laravel/sanctum": "^v4.0.5",
         "laravel/tinker": "^v2.10.0",
         "league/uri-interfaces": "^7.4.1",
         "stancl/tenancy": "^v3.8.5",
@@ -19,13 +19,13 @@
     "require-dev": {
         "barryvdh/laravel-debugbar": "^v3.14.9",
         "fakerphp/faker": "^v1.24.1",
-        "laravel/breeze": "^v1.29.1",
+        "laravel/breeze": "^v2.0.6",
         "kkomelin/laravel-translatable-string-exporter": "^1.22.0",
         "laravel/pint": "^v1.18.3",
         "laravel/sail": "^v1.39.1",
         "mockery/mockery": "^1.6.12",
-        "nunomaduro/collision": "^v6.4.0",
-        "phpunit/phpunit": "^9.6.21",
+        "nunomaduro/collision": "^v8.5.0",
+        "pestphp/pest": "^v2.36.0",
         "spatie/laravel-ignition": "^2.9.0"
     },
     "autoload": {
