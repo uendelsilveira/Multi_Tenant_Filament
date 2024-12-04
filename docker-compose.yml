@@ -1,5 +1,4 @@
 # For more information: https://laravel.com/docs/sail
-version: '3'
 services:
     web:
         build:
@@ -59,18 +58,15 @@ services:
             retries: 3
             timeout: 5s
     phpmyadmin:
-        image: 'phpmyadmin:latest'
-        links:
-          - "mysql:db"
+        image: phpmyadmin:latest
         environment:
-            PMA_USER: '${DB_USERNAME}'
-            PMA_PASSWORD: '${DB_PASSWORD}'
-            PMA_HOST: '${DB_HOST}'
-            APP_PMA_PORT: '${PMA_PORT-8080}'
+            PMA_HOST: mysql
+            PMA_USER: ${DB_USERNAME:-root}
+            PMA_PASSWORD: ${DB_PASSWORD:-password}
         ports:
-            - '${PMA_PORT-8080}:80'
+            - "${PMA_PORT:-8080}:80"
         depends_on:
-          - mysql
+            - mysql
         networks:
             - sail
 networks:
