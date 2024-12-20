@@ -24,5 +24,5 @@ class User extends BaseUser
 {
     use HasFactory;
 
-    protected $table = "users";
+    protected $table = "system_users";
 }

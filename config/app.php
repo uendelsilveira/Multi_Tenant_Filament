@@ -55,6 +55,7 @@ return [
     */
 
     'url' => env('APP_URL', 'http://localhost'),
+    'domains' => env('TN_CENTRAL_DOMAINS'),
 
     'asset_url' => env('ASSET_URL'),
 

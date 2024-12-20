@@ -6,7 +6,8 @@
     "license": "MIT",
     "require": {
         "php": "^8.3.0",
-        "filament/filament": "^v3.2.127",
+        "filament/filament": "^3.2",
+        "filament/forms": "^3.2",
         "guzzlehttp/guzzle": "^7.9.2",
         "laravel/framework": "^v11.34.2",
         "laravel/passport": "^v12.3.1",

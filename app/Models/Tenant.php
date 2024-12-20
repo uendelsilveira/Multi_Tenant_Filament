@@ -2,6 +2,8 @@
 
 namespace App\Models;
 
+use Illuminate\Database\Eloquent\Factories\HasFactory;
+use Stancl\Tenancy\Database\Models\Domain;
 use Stancl\Tenancy\Database\Models\Tenant as BaseTenant;
 use Stancl\Tenancy\Contracts\TenantWithDatabase;
 use Stancl\Tenancy\Database\Concerns\HasDatabase;
@@ -30,4 +32,32 @@ use Stancl\Tenancy\Database\Concerns\HasDomains;
 class Tenant extends BaseTenant implements TenantWithDatabase
 {
     use HasDatabase, HasDomains;
+    use HasFactory;
+
+    protected $fillable = [
+        'id',
+        'data',
+    ];
+
+    protected $casts = [
+        'data' => 'array',
+    ];
+
+    public static function boot(): void
+    {
+        parent::boot();
+
+        static::creating(function ($tenant) {
+            if (empty($tenant->domain)) {
+                $tenant->domain = strtolower($tenant->id);
+            }
+        });
+
+        static::created(function ($tenant) {
+            Domain::create([
+                'domain' => $tenant->domain,
+                'tenant_id' => $tenant->id,
+            ]);
+        });
+    }
 }
